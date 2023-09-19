@@ -29,19 +29,9 @@
 	<body>
 		<center>
 		<label>CSV</label>
-		<textarea id="input" placeholder="Header 1, Header 2, Header 3 ...">
-h1, h2, "h3 and h4, and h5"
-a, b, canvas
-d, e, data
-r, t, s
-		</textarea>
+		<textarea id="input" placeholder="Header 1, Header 2, Header 3 ..."></textarea>
 		<label>Pattern</label>
-		<textarea id="pattern" placeholder="{Header 1}, {Header 2}, {Header 3} ...">
-{h1}:
-	- {h2}
-	- {h3 and h4, and h5}
-yes it workds
-		</textarea>
+		<textarea id="pattern" placeholder="{Header 1}, {Header 2}, {Header 3} ..."></textarea>
 		<button onclick="bulkCreate()">Bulk Create</button>
 		<textarea id="output" readonly></textarea>
 		<script>
