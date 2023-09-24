@@ -65,7 +65,7 @@ function bulkCreate(){
 		if (c == '"'){
 			processQuote()
 		}
-		if ((c == ',' && !quoted) || c == '\n' && entry != ''){
+		if (((c == ',' && !quoted) || c == '\n') && entry.trim() != ''){
 			if (begunQuoted && endedQuoted && !partiallyQuoted){
 				cleanEntry()
 			}
