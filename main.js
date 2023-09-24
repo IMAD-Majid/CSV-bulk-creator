@@ -138,5 +138,5 @@ function bulkCreate(){
 	outputElm.readOnly = false
 	outputElm.value = bulkCreation.join("\n");
 	outputElm.readOnly = true
-	document.getElementById("count").textValue = bulkCreation.length;
+	document.getElementById("count").textContent = bulkCreation.length;
 }
