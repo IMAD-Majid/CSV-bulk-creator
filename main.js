@@ -71,6 +71,7 @@ function bulkCreate(){
 			}
 			row = rows[rowId]
 			csv[row].push(entry.trim());
+			console.log(csv)
 			rowId = (rowId + 1)% rows.length;
 			if (c == '\n'){
 				rowId = 0
@@ -96,7 +97,7 @@ function bulkCreate(){
 	let readingVariable = false;
 	let staticEntry = '';
 	let variableEntry = '';
-	let columnsSize = input.split('\n').length - 1
+	let columnsSize = csv[Object.keys(csv)[0]].length
 	let bulkCreation = [];
 	for (let i = 0; i<columnsSize; i++){
 		bulkCreation.push('');
