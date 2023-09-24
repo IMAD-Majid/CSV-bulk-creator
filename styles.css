@@ -1,0 +1,22 @@
+
+body {
+	margin-top:2em;
+	margin-bottom:40em;
+}
+* {
+	font-family:consolas;
+	color:white;
+	background-color:black;
+}
+textarea {
+	display:block;
+	margin:1em 0;
+	width:40em;
+	height:8em;
+	padding:1em 1em;
+}
+button {
+	border:2px solid lightgreen;
+	border-radius:1em;
+	padding:1em 2em;
+}
