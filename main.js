@@ -60,28 +60,44 @@ function bulkCreate(){
 
 	let rows = Object.keys(csv);
 	let row, rowId = 0;
+	let waitingEndOfLine = false;
 	// get columns
 	for (let c of input.slice(input.split('\n')[0].length + 1, input.length)){
+		if (waitingEndOfLine && c != '\n'){
+			continue
+		} else{
+			waitingEndOfLine = false
+		}
+		if ((entry + c).trim() == ''){
+			continue;
+		}
 		if (c == '"'){
 			processQuote()
 		}
-		if (((c == ',' && !quoted) || c == '\n') && entry.trim() != ''){
+		if ((c == ',' && !quoted) || c == '\n'){
 			if (begunQuoted && endedQuoted && !partiallyQuoted){
 				cleanEntry()
 			}
 			row = rows[rowId]
 			csv[row].push(entry.trim());
-			console.log(csv)
+			console.log(rows[rowId], entry, c)
 			rowId = (rowId + 1)% rows.length;
+			console.log(rowId)
 			if (c == '\n'){
+				if (rowId <= rows.length-1){
+					console.log(rowId)
+					for (let i=1; i<=(rows.length-rowId); i++){
+						csv[rows[rowId + i - 1]].push('');
+						console.log(rows[rowId], '')
+					}
+				}
 				rowId = 0
+			} else if (rowId == 0){
+				waitingEndOfLine = true;
 			}
-
+			
 			resetParameters()
 			continue;
-		}
-		if (c == ' ' && entry == ''){
-			continue
 		}
 		entry += c
 	}
@@ -92,12 +108,18 @@ function bulkCreate(){
 		row = rows[rowId]
 		csv[row].push(entry.trim());
 	}
+	if (rowId < rows.length-1){
+		for (let i=1; i<=(rows.length-(1+rowId)); i++){
+			csv[rows[rowId + i]].push('');
+		}
+	}
+	console.log(csv)
 	
 	// apply pattern
 	let readingVariable = false;
 	let staticEntry = '';
 	let variableEntry = '';
-	let columnsSize = csv[Object.keys(csv)[0]].length
+	let columnsSize = csv[rows[0]].length
 	let bulkCreation = [];
 	for (let i = 0; i<columnsSize; i++){
 		bulkCreation.push('');
