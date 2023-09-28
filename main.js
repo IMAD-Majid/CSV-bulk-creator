@@ -1,5 +1,5 @@
 function bulkCreate(){
-	let input = document.getElementById("input").value
+	let input = document.getElementById("input").value.trim()
 	let pattern = document.getElementById("pattern").value
 	let outputElm = document.getElementById("output")
 	
@@ -62,11 +62,15 @@ function bulkCreate(){
 	let row, rowId = 0;
 	let waitingEndOfLine = false;
 	// get columns
-	for (let c of input.slice(input.split('\n')[0].length + 1, input.length)){
-		if (waitingEndOfLine && c != '\n'){
-			continue
-		} else{
-			waitingEndOfLine = false
+	let inputBody = input.slice(input.split('\n')[0].length + 1, input.length);
+	for (let i=0; i<inputBody.length; i++){
+		let c = inputBody[i];
+		if (waitingEndOfLine){
+			if(c != '\n'){
+				continue
+			} else{
+				waitingEndOfLine = false
+			}
 		}
 		if ((entry + c).trim() == ''){
 			continue;
@@ -80,15 +84,11 @@ function bulkCreate(){
 			}
 			row = rows[rowId]
 			csv[row].push(entry.trim());
-			console.log(rows[rowId], entry, c)
 			rowId = (rowId + 1)% rows.length;
-			console.log(rowId)
 			if (c == '\n'){
 				if (rowId <= rows.length-1){
-					console.log(rowId)
 					for (let i=1; i<=(rows.length-rowId); i++){
 						csv[rows[rowId + i - 1]].push('');
-						console.log(rows[rowId], '')
 					}
 				}
 				rowId = 0
