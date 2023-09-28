@@ -86,7 +86,7 @@ function bulkCreate(){
 			csv[row].push(entry.trim());
 			rowId = (rowId + 1)% rows.length;
 			if (c == '\n'){
-				if (rowId <= rows.length-1){
+				if (rowId <= rows.length-1 && rowId != 0){
 					for (let i=1; i<=(rows.length-rowId); i++){
 						csv[rows[rowId + i - 1]].push('');
 					}
